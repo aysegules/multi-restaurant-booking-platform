@@ -3,7 +3,10 @@ import type { Request, Response } from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import "dotenv/config";
+
 import { errorHandler } from "./middlewares/error.middleware";
+
+import authRouter from "./routes/auth.routes";
 
 const app = express();
 
@@ -32,6 +35,8 @@ app.use(cookieParser());
 app.get("/", (req: Request, res: Response) => {
   res.status(200).json({ message: "Server is running..." });
 });
+
+app.use("/auth", authRouter);
 
 app.use(errorHandler);
 
